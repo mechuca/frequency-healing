@@ -103,32 +103,60 @@ export default function HomePage() {
 
 function LibraryFeature({ product }: { product: (typeof PRODUCTS)[number] }) {
   return (
-    <Link href={`/product/${product.slug}`} className="group mt-12 grid overflow-hidden rounded-[2rem] bg-graphite text-paper shadow-[0_30px_90px_-60px_rgba(21,23,21,0.85)] md:grid-cols-[0.72fr_1fr]">
-      <div className="category-all tone-cover relative min-h-72 overflow-hidden md:min-h-full">
-        <div className="absolute inset-0 flex flex-col justify-between p-6 text-paper sm:p-8">
-          <div className="data-num text-[11px] uppercase tracking-widest opacity-70">Library · Complete Library</div>
-          <div>
-            <svg viewBox="0 0 360 56" className="w-full opacity-90" aria-hidden="true">
-              <path d="M0 28 C 18 6, 36 6, 54 28 S 90 50, 108 28 S 144 6, 162 28 S 198 50, 216 28 S 252 6, 270 28 L 360 28" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    <Link href={`/product/${product.slug}`} className="group mt-12 block overflow-hidden rounded-[2rem] bg-graphite text-paper shadow-[0_34px_110px_-70px_rgba(21,23,21,0.9)] transition duration-300 hover:-translate-y-1">
+      <div className="relative grid min-h-[31rem] gap-8 overflow-hidden p-5 sm:p-8 md:grid-cols-[1.02fr_0.98fr] md:p-10 lg:p-12">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(233,234,228,0.12),transparent_24rem),radial-gradient(circle_at_88%_100%,rgba(199,207,201,0.12),transparent_28rem)]" />
+        <div className="absolute inset-y-0 left-0 hidden w-px bg-white/10 md:block" />
+
+        <div className="relative flex min-w-0 flex-col justify-between rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-5 backdrop-blur-md sm:p-7">
+          <div className="flex items-center justify-between gap-4">
+            <div className="data-num text-[11px] uppercase tracking-widest text-paper/50">Library · Complete Library</div>
+            <div className="data-num rounded-full bg-paper px-3 py-2 text-[11px] text-graphite">27 tones</div>
+          </div>
+          <div className="my-12 sm:my-16">
+            <svg viewBox="0 0 420 72" className="w-full text-paper/82" aria-hidden="true">
+              <path d="M0 36 C 21 8, 42 8, 63 36 S 105 64, 126 36 S 168 8, 189 36 S 231 64, 252 36 S 294 8, 315 36 L 420 36" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
-            <div className="mt-5 font-display text-4xl lowercase leading-none tracking-[-0.045em] sm:text-5xl">complete library</div>
-            <div className="data-num mt-3 text-xs opacity-70">27 tracks · 11:11:11 · FLAC + MP3</div>
+          </div>
+          <div>
+            <div className="font-display text-[3.2rem] lowercase leading-[0.88] tracking-[-0.055em] sm:text-6xl">complete library</div>
+            <div className="data-num mt-4 text-xs uppercase tracking-widest text-paper/48">FLAC + MP3 · lifetime files</div>
           </div>
         </div>
-      </div>
-      <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-10">
-        <div>
-          <div className="data-num text-[11px] uppercase tracking-widest text-paper/45">Best value</div>
-          <h3 className="mt-4 font-display text-4xl lowercase leading-none tracking-[-0.045em] md:text-6xl">complete library.</h3>
-          <p className="mt-5 max-w-xl leading-7 text-paper/62">All 27 tones, in lossless. Far less than buying the sets separately.</p>
-        </div>
-        <div className="mt-10 flex flex-wrap items-center gap-3">
-          <span className="data-num rounded-full bg-paper px-4 py-3 text-sm text-graphite">$49</span>
-          <span className="data-num rounded-full border border-white/10 px-4 py-3 text-sm text-paper/55">$75 value bought as sets</span>
-          <span className="pill-glass tap group-hover:translate-y-[-1px]">
-            Open library
-            <ArrowRight className="h-3.5 w-3.5" />
-          </span>
+
+        <div className="relative flex min-w-0 flex-col justify-between py-1 md:pl-2">
+          <div>
+            <div className="data-num inline-flex rounded-full border border-white/10 bg-white/[0.055] px-3 py-2 text-[11px] uppercase tracking-widest text-paper/50">Best value</div>
+            <h3 className="mt-6 max-w-2xl font-display text-[3rem] lowercase leading-[0.9] tracking-[-0.055em] text-paper sm:text-6xl lg:text-7xl">
+              every StillTones frequency in one library.
+            </h3>
+            <p className="mt-6 max-w-xl text-base leading-7 text-paper/62 sm:text-lg">
+              All 27 tones, rendered lossless and held for 11:11:11 each. Far less than buying the five sets separately.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            <div className="rounded-2xl bg-paper p-4 text-graphite">
+              <div className="data-num text-[11px] uppercase tracking-widest opacity-55">Library price</div>
+              <div className="data-num mt-2 text-3xl">$49</div>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-4">
+              <div className="data-num text-[11px] uppercase tracking-widest text-paper/40">Set value</div>
+              <div className="data-num mt-2 text-3xl text-paper/75">$75</div>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-4">
+              <div className="data-num text-[11px] uppercase tracking-widest text-paper/40">Included</div>
+              <div className="data-num mt-2 text-3xl text-paper/75">27</div>
+            </div>
+          </div>
+
+          <div className="mt-6 flex items-center gap-3 text-paper">
+            <span className="pill-glass tap group-hover:translate-y-[-1px]">
+              Open library
+              <ArrowRight className="h-3.5 w-3.5" />
+            </span>
+            <span className="data-num text-xs uppercase tracking-widest text-paper/38">one purchase · files you keep</span>
+          </div>
         </div>
       </div>
     </Link>
