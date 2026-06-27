@@ -54,6 +54,8 @@ export default function HomePage() {
       </section>
 
       <main>
+        <NextReleaseBanner />
+
         <section className="mx-auto max-w-7xl px-5 py-24 sm:px-6 md:px-10 lg:py-32">
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
@@ -92,6 +94,38 @@ export default function HomePage() {
       <FaqSection />
       <Footer />
     </div>
+  );
+}
+
+function NextReleaseBanner() {
+  return (
+    <section className="hairline-t bg-paper px-4 pt-8 sm:px-6 sm:pt-10 md:px-10">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.5rem] bg-graphite text-paper shadow-[0_30px_90px_-60px_rgba(21,23,21,0.75)] sm:rounded-[2rem]">
+        <div className="relative grid gap-7 p-5 sm:p-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-center lg:p-10">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(233,234,228,0.16),transparent_22rem),radial-gradient(circle_at_86%_100%,rgba(95,113,89,0.22),transparent_24rem)]" />
+          <div className="relative min-w-0 max-w-3xl">
+            <div className="data-num inline-flex rounded-full border border-white/10 bg-white/[0.055] px-3 py-2 text-[11px] uppercase tracking-widest text-paper/55">
+              Next release
+            </div>
+            <h2 className="mt-5 font-display text-[2.55rem] lowercase leading-[0.94] tracking-[-0.045em] sm:text-5xl md:text-6xl">
+              binaural beats are coming next.
+            </h2>
+            <p className="mt-5 max-w-2xl text-sm leading-6 text-paper/62 sm:text-base sm:leading-7">
+              A new StillTones series is in progress: clean two-tone pairs, built with the same restrained approach. No narration, no busy layers, no medical claims.
+            </p>
+          </div>
+          <div className="relative flex min-w-0 flex-col gap-3 md:items-end">
+            <div className="data-num w-fit rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-3 text-sm text-paper/70">
+              Release window · soon
+            </div>
+            <Link href="/shop" className="pill-glass tap w-fit">
+              Explore current tones
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
