@@ -14,29 +14,31 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-paper">
-      <section className="relative min-h-[94svh] overflow-hidden bg-graphite text-paper">
+      <section className="relative overflow-hidden bg-graphite text-paper">
         <div className="hero-grid absolute inset-0" />
         <HeroWaveform />
         <div className="hero-vignette absolute inset-0" />
         <div className="relative z-10">
           <Header variant="dark" />
-          <div className="mx-auto flex min-h-[78svh] max-w-7xl flex-col justify-between gap-12 px-5 pb-14 pt-10 sm:px-6 md:px-10">
+          <div className="mx-auto max-w-7xl px-5 pt-12 sm:px-6 md:px-10 lg:pt-16">
             <div className="max-w-[78rem]">
               <div className="pill-glass animate-fade-up delay-1">
                 <span className="h-1.5 w-1.5 rounded-full bg-paper" />
                 Lossless · 11:11:11 · FLAC
               </div>
-              <h1 className="mt-8 max-w-[78rem] font-display text-[clamp(3.4rem,9vw,8.5rem)] lowercase leading-[0.88] tracking-[-0.06em]">
-                <span className="line-reveal delay-1 md:whitespace-nowrap">a quiet instrument</span>
-                <span className="line-reveal delay-2 md:whitespace-nowrap">for focused work,</span>
-                <span className="line-reveal delay-3 text-paper/55 md:whitespace-nowrap">calm, and sleep.</span>
+              <h1 className="mt-8 max-w-[78rem] font-display text-[clamp(3.4rem,9vw,8.5rem)] lowercase leading-[0.86] tracking-[-0.065em]">
+                <span className="line-reveal delay-1 xl:whitespace-nowrap">a quiet instrument</span>
+                <span className="line-reveal delay-2 xl:whitespace-nowrap">for focused work,</span>
+                <span className="line-reveal delay-3 text-paper/55 xl:whitespace-nowrap">calm, and sleep.</span>
               </h1>
-              <p className="mt-8 max-w-2xl animate-fade-up text-base leading-7 text-paper/70 delay-4 sm:text-lg">
-                Single-frequency tones, held perfectly even, for as long as you need them. No beats, no melodies, no narration. Press play and your browser generates the tone live.
-              </p>
-              <div className="mt-8 animate-fade-up delay-5">
-                <ToneSampler />
-                <div className="mt-2 flex flex-wrap gap-3">
+            </div>
+
+            <div className="mt-8 grid gap-8 animate-fade-up delay-4 lg:grid-cols-[minmax(0,42rem)_22rem] lg:items-end lg:justify-between">
+              <div>
+                <p className="text-base leading-7 text-paper/70 sm:text-lg">
+                  Single-frequency tones, held perfectly even. No beats, no melodies, no narration. Preview every tone live, then keep the full-length files forever.
+                </p>
+                <div className="mt-7 flex flex-wrap gap-3">
                   <Link href="/shop" className="pill-solid tap !bg-paper !text-graphite">
                     Browse the catalogue
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -44,13 +46,11 @@ export default function HomePage() {
                   <Link href="/about" className="pill-glass tap">Read the equation</Link>
                 </div>
               </div>
+              <SignalCard />
             </div>
 
-            <div className="data-num grid grid-cols-2 gap-x-8 gap-y-4 text-[11px] text-paper/50 md:grid-cols-4 animate-fade-up delay-5">
-              <Stat label="Tracks" value="27" />
-              <Stat label="Per track" value="11:11:11" />
-              <Stat label="Sample rate" value="44.1 kHz" />
-              <Stat label="Amplitude" value="-6 dBFS" />
+            <div className="mt-12 pb-12 animate-fade-up delay-5 lg:mt-14 lg:pb-16">
+              <ToneSampler />
             </div>
           </div>
         </div>
@@ -102,6 +102,29 @@ function Stat({ label, value }: { label: string; value: string }) {
       <div className="text-paper">{value}</div>
       <div className="mt-1 uppercase tracking-widest">{label}</div>
     </div>
+  );
+}
+
+function SignalCard() {
+  return (
+    <aside className="hidden rounded-[2rem] border border-white/10 bg-white/[0.045] p-5 text-paper shadow-[0_40px_100px_-60px_rgba(0,0,0,0.8)] backdrop-blur-md animate-fade-up delay-5 lg:block">
+      <div className="flex items-center justify-between gap-4">
+        <div className="data-num text-[11px] uppercase tracking-widest text-paper/50">Live signal</div>
+        <div className="h-2 w-2 rounded-full bg-paper" />
+      </div>
+      <div className="mt-7 rounded-2xl bg-paper/5 px-4 py-3 text-paper/80">
+        <Oscilloscope active height={52} color="#E9EAE4" />
+      </div>
+      <div className="data-num mt-7 grid grid-cols-2 gap-x-6 gap-y-5 text-[11px] text-paper/50">
+        <Stat label="Tracks" value="27" />
+        <Stat label="Per track" value="11:11:11" />
+        <Stat label="Sample" value="44.1 kHz" />
+        <Stat label="Level" value="-6 dBFS" />
+      </div>
+      <p className="mt-7 text-sm leading-6 text-paper/55">
+        Every preview is generated in-browser from the same sine-wave equation used for the final files.
+      </p>
+    </aside>
   );
 }
 

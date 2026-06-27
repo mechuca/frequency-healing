@@ -47,7 +47,7 @@ export function ToneSampler() {
   };
 
   return (
-    <div className="max-w-none w-[calc(100vw-2.5rem)] sm:w-[calc(100vw-3rem)] md:w-[calc(100vw-5rem)] lg:w-[calc((100vw+80rem)/2-2.5rem)]">
+    <div className="tone-rail">
       <div className="flex items-center justify-between gap-4">
         <div className="data-num text-[11px] uppercase tracking-widest text-paper/50">Try a tone · 11s preview</div>
         <div className="flex gap-1">
@@ -67,7 +67,7 @@ export function ToneSampler() {
               key={`${tone.name}-${tone.freq}`}
               type="button"
               onClick={() => (on ? stop() : play(tone.freq, `${tone.name} · ${tone.freq} Hz`))}
-              className={`snap-start flex w-[204px] shrink-0 flex-col rounded-3xl p-5 text-left transition duration-300 hover:scale-[1.03] active:scale-[0.98] ${on ? "bg-paper text-graphite" : "bg-white/[0.055] text-paper backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.10),inset_0_0_0_1px_rgba(255,255,255,0.08)]"}`}
+              className={`snap-start flex w-[220px] shrink-0 flex-col rounded-3xl p-5 text-left transition duration-300 hover:scale-[1.025] active:scale-[0.98] sm:w-[244px] ${on ? "bg-paper text-graphite" : "bg-white/[0.055] text-paper backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.10),inset_0_0_0_1px_rgba(255,255,255,0.08)]"}`}
               aria-pressed={on}
             >
               <span className="flex items-center gap-2">
