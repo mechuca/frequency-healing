@@ -20,7 +20,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         question: "How are the tones made?",
         answer:
-          "From one equation. Each track is a pure sine wave, the simplest possible sound, rendered at full studio quality and held perfectly steady from the first second to the last. No samples, no loops, no AI guesswork, just clean math turned into sound. You can read the exact equation on our About page, and press play on any track to hear the same one run live in your browser.",
+          "From one equation. Each track is a pure sine wave, the simplest possible sound, rendered at full studio quality and held perfectly steady from the first second to the last. No samples, no loops, no AI guesswork, just clean math turned into sound. You can read the exact equation on our Science page, and press play on any track to hear the same one run live in your browser.",
       },
       {
         question: "Do these have health benefits? Will they help with a condition?",

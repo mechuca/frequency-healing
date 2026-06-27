@@ -8,7 +8,7 @@ export function Footer() {
         <div>
           <div className="flex items-center gap-2 text-ink">
             <WaveformMark />
-            <span className="font-display text-2xl lowercase">sustain</span>
+            <span className="font-display text-2xl">StillTones</span>
           </div>
           <p className="mt-4 max-w-md text-sm leading-6 text-ink-2">
             Single-frequency tones generated from one equation. Built for quiet work, study, calm, and long rooms.
@@ -16,7 +16,7 @@ export function Footer() {
         </div>
         <div className="grid grid-cols-2 gap-8 text-sm md:grid-cols-3">
           <FooterGroup title="Store" links={[['Shop', '/shop'], ['Cart', '/cart'], ['Library', '/product/complete-library']]} />
-          <FooterGroup title="Learn" links={[['The Science', '/about'], ['Home', '/']]} />
+          <FooterGroup title="Learn" links={[['The Science', '/science'], ['About', '/about'], ['Home', '/']]} />
           <div>
             <div className="data-num text-[11px] uppercase tracking-widest text-ink-2">Specs</div>
             <p className="mt-3 max-w-[12rem] text-ink-2">FLAC. 44.1 kHz. 11:11:11 per track. -6 dBFS.</p>

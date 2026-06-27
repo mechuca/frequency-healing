@@ -17,14 +17,14 @@ export function Header({ variant = "light" }: HeaderProps) {
   return (
     <header className={`sticky top-0 z-40 border-b backdrop-blur-2xl ${dark ? "border-white/5 bg-graphite/42 text-paper" : "border-ink/5 bg-paper/78 text-ink"}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-6 md:px-10">
-        <Link href="/" onClick={() => haptic()} className="tap flex items-center gap-2 rounded-full" aria-label="Sustain home">
+        <Link href="/" onClick={() => haptic()} className="tap flex items-center gap-2 rounded-full" aria-label="StillTones home">
           <WaveformMark />
-          <span className="font-display text-2xl lowercase tracking-tight">sustain</span>
+          <span className="font-display text-2xl tracking-tight">StillTones</span>
         </Link>
 
         <nav className="hidden items-center gap-2 md:flex" aria-label="Main navigation">
           <NavLink href="/shop" dark={dark}>Shop</NavLink>
-          <NavLink href="/about" dark={dark}>The Science</NavLink>
+          <NavLink href="/science" dark={dark}>The Science</NavLink>
           <NavLink href="/about" dark={dark}>About</NavLink>
         </nav>
 

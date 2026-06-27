@@ -20,7 +20,7 @@ export default function SuccessPage() {
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link href="/shop" className="pill-solid tap">Back to shop</Link>
-          <Link href="/about" className="pill-outline tap">Read the science</Link>
+          <Link href="/science" className="pill-outline tap">Read the science</Link>
         </div>
       </main>
       <Footer />

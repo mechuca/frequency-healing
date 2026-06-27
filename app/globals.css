@@ -187,24 +187,24 @@ a:focus-visible {
 }
 
 .tone-rail {
-  width: calc(100vw - 1.25rem);
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 @media (min-width: 640px) {
-  .tone-rail {
-    width: calc(100vw - 1.5rem);
-  }
+  .tone-rail { padding-left: 1.5rem; padding-right: 1.5rem; }
 }
 
 @media (min-width: 768px) {
-  .tone-rail {
-    width: calc(100vw - 2.5rem);
-  }
+  .tone-rail { padding-left: 2.5rem; padding-right: 2.5rem; }
 }
 
 @media (min-width: 1280px) {
   .tone-rail {
-    width: calc(100vw - (((100vw - 80rem) / 2) + 2.5rem));
+    padding-left: calc(((100vw - 80rem) / 2) + 2.5rem);
+    padding-right: calc(((100vw - 80rem) / 2) + 2.5rem);
   }
 }
 

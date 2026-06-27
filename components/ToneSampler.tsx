@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Play, Square } from "lucide-react";
 import { useTonePreview } from "@/lib/audio";
 import { haptic } from "@/lib/haptics";
+import { useToast } from "@/lib/toast";
 
 const SAMPLE_TONES = [
   { name: "Nightfall", freq: 20, family: "Night" },
@@ -20,6 +21,7 @@ const SAMPLE_TONES = [
 
 export function ToneSampler() {
   const { play, stop, freq: playingFreq } = useTonePreview();
+  const { showToast } = useToast();
   const scrollRef = useRef<HTMLDivElement>(null);
   const pausedRef = useRef(false);
   const [canLeft, setCanLeft] = useState(false);
@@ -57,7 +59,7 @@ export function ToneSampler() {
 
       if (!pausedRef.current && !document.hidden) {
         const loopPoint = el.scrollWidth / 2;
-        el.scrollLeft += delta * 0.035;
+        el.scrollLeft += delta * 0.08;
         if (el.scrollLeft >= loopPoint) el.scrollLeft -= loopPoint;
       }
 
@@ -114,10 +116,14 @@ export function ToneSampler() {
             <button
               key={`${tone.name}-${tone.freq}-${index}`}
               type="button"
-              onClick={() => {
+              onClick={async () => {
                 haptic(on ? "light" : "medium");
                 if (on) stop();
-                else play(tone.freq, `${tone.name} · ${tone.freq} Hz`);
+                else {
+                  const result = await play(tone.freq, `${tone.name} · ${tone.freq} Hz`);
+                  if (result === "unsupported") showToast({ title: "audio preview is not available", description: "This browser does not support Web Audio previews.", kind: "error" });
+                  if (result === "blocked") showToast({ title: "tap again to start audio", description: "The browser blocked the first audio request.", kind: "error" });
+                }
               }}
               className={`flex w-[220px] shrink-0 flex-col rounded-3xl p-5 text-left transition duration-300 hover:scale-[1.025] active:scale-[0.98] sm:w-[244px] ${on ? "bg-paper text-graphite" : "bg-white/[0.055] text-paper backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.10),inset_0_0_0_1px_rgba(255,255,255,0.08)]"}`}
               aria-pressed={on}

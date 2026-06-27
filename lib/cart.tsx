@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { PRODUCTS, type Product } from "@/data/products";
+import { useToast } from "@/lib/toast";
 
 type CartLine = {
   slug: string;
@@ -27,8 +28,10 @@ const STORAGE_KEY = "frequency-healing.cart.v1";
 const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const { showToast } = useToast();
   const [items, setItems] = useState<CartLine[]>([]);
   const [hydrated, setHydrated] = useState(false);
+  const [storageWarned, setStorageWarned] = useState(false);
 
   useEffect(() => {
     try {
@@ -36,18 +39,25 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (raw) setItems(JSON.parse(raw) as CartLine[]);
     } catch {
       setItems([]);
+      if (!storageWarned) {
+        showToast({ title: "cart saved for this session only", description: "Your browser blocked local storage.", kind: "error" });
+        setStorageWarned(true);
+      }
     }
     setHydrated(true);
-  }, []);
+  }, [showToast, storageWarned]);
 
   useEffect(() => {
     if (!hydrated) return;
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     } catch {
-      // Local storage can be unavailable in private browsing modes.
+      if (!storageWarned) {
+        showToast({ title: "cart saved for this session only", description: "Your browser blocked local storage.", kind: "error" });
+        setStorageWarned(true);
+      }
     }
-  }, [hydrated, items]);
+  }, [hydrated, items, showToast, storageWarned]);
 
   const resolved = useMemo(
     () =>

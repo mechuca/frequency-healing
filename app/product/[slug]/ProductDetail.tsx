@@ -7,6 +7,7 @@ import { CATEGORY_CLASS, CATEGORY_LABEL, type Product } from "@/data/products";
 import { TrackRow } from "@/components/TrackRow";
 import { useCart } from "@/lib/cart";
 import { haptic } from "@/lib/haptics";
+import { useToast } from "@/lib/toast";
 
 const PRODUCT_DETAIL_COPY: Record<string, { headline: string; use: string; character: string }> = {
   "deep-work": {
@@ -35,7 +36,7 @@ const PRODUCT_DETAIL_COPY: Record<string, { headline: string; use: string; chara
     character: "High, clean, direct, and intentionally present.",
   },
   "complete-library": {
-    headline: "Every tone Sustain makes, across focus, sleep, calm, study, and bright.",
+    headline: "Every tone StillTones makes, across focus, sleep, calm, study, and bright.",
     use: "Use this when you want the full instrument, with a tone for every part of the day and every kind of quiet.",
     character: "The deep low end, the warm mids, the clear study range, and the bright top end in one library.",
   },
@@ -58,6 +59,7 @@ const PRODUCT_DETAIL_COPY: Record<string, { headline: string; use: string; chara
 
 export function ProductDetail({ product }: { product: Product }) {
   const { add } = useCart();
+  const { showToast } = useToast();
   const [added, setAdded] = useState(false);
   const detail = PRODUCT_DETAIL_COPY[product.slug];
   const frequencies = product.tracks.map((track) => track.freq.toLocaleString()).join(", ");
@@ -100,6 +102,7 @@ export function ProductDetail({ product }: { product: Product }) {
               onClick={() => {
                 haptic("success");
                 add(product.slug);
+                showToast({ title: `added ${product.title.toLowerCase()} to cart`, kind: "success", action: { label: "View cart", href: "/cart" } });
                 setAdded(true);
                 window.setTimeout(() => setAdded(false), 1600);
               }}

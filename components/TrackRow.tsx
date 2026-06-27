@@ -4,10 +4,12 @@ import { Play, Square } from "lucide-react";
 import type { Track } from "@/data/products";
 import { useTonePreview } from "@/lib/audio";
 import { haptic } from "@/lib/haptics";
+import { useToast } from "@/lib/toast";
 import { Oscilloscope } from "./Oscilloscope";
 
 export function TrackRow({ track, index }: { track: Track; index: number }) {
   const { play, stop, isPlaying } = useTonePreview();
+  const { showToast } = useToast();
   const playing = isPlaying(track.freq);
 
   return (
@@ -22,10 +24,14 @@ export function TrackRow({ track, index }: { track: Track; index: number }) {
         <Oscilloscope active={playing} height={32} color="currentColor" />
       </div>
       <button
-        onClick={() => {
+        onClick={async () => {
           haptic(playing ? "light" : "medium");
           if (playing) stop();
-          else play(track.freq, track.name);
+          else {
+            const result = await play(track.freq, track.name);
+            if (result === "unsupported") showToast({ title: "audio preview is not available", description: "This browser does not support Web Audio previews.", kind: "error" });
+            if (result === "blocked") showToast({ title: "tap again to start audio", description: "The browser blocked the first audio request.", kind: "error" });
+          }
         }}
         className="tap flex h-11 w-11 items-center justify-center rounded-full bg-ink text-paper data-[playing=true]:bg-[color:var(--accent-hue)]"
         data-playing={playing}

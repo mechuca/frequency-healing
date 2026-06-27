@@ -11,15 +11,15 @@ const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], var
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Sustain",
-    template: "%s | Sustain",
+    default: "StillTones",
+    template: "%s | StillTones",
   },
   description: "Pure frequency audio.",
   icons: {
     icon: "/icon.svg",
   },
   openGraph: {
-    title: "Sustain",
+    title: "StillTones",
     description: "Pure frequency audio.",
     type: "website",
   },

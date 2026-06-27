@@ -8,6 +8,7 @@ type ToneState = {
 };
 
 type Listener = () => void;
+export type TonePlayResult = "played" | "unsupported" | "blocked";
 
 class TonePreview {
   private ctx: AudioContext | null = null;
@@ -41,10 +42,17 @@ class TonePreview {
     this.listeners.forEach((listener) => listener());
   }
 
-  async play(freq: number, name: string, durationMs = 11000) {
+  async play(freq: number, name: string, durationMs = 11000): Promise<TonePlayResult> {
     const ctx = this.ensureContext();
-    if (!ctx) return;
-    if (ctx.state === "suspended") await ctx.resume();
+    if (!ctx) return "unsupported";
+    if (ctx.state === "suspended") {
+      try {
+        await ctx.resume();
+      } catch {
+        return "blocked";
+      }
+      if (ctx.state === "suspended") return "blocked";
+    }
     this.stopImmediate();
 
     const osc = ctx.createOscillator();
@@ -67,6 +75,7 @@ class TonePreview {
     this.analyser = analyser;
     this.emit({ freq, name });
     this.stopTimer = setTimeout(() => this.stop(), durationMs);
+    return "played";
   }
 
   stop() {

@@ -10,7 +10,7 @@ import { ToneSampler } from "@/components/ToneSampler";
 import { PRODUCTS } from "@/data/products";
 
 export default function HomePage() {
-  const featured = PRODUCTS.filter((product) => product.kind === "set");
+  const featured = PRODUCTS.slice(0, 6);
 
   return (
     <div className="min-h-screen bg-paper">
@@ -33,20 +33,17 @@ export default function HomePage() {
               </h1>
             </div>
 
-            <div className="mt-8 grid gap-8 animate-fade-up delay-4 lg:grid-cols-[minmax(0,42rem)_22rem] lg:items-start lg:justify-between">
-              <div>
-                <p className="text-base leading-7 text-paper/70 sm:text-lg">
-                  Single-frequency tones, held perfectly even. No beats, no melodies, no narration. Preview every tone live, then keep the full-length files forever.
-                </p>
-                <div className="mt-7 flex flex-wrap gap-3">
-                  <Link href="/shop" className="pill-solid tap !bg-paper !text-graphite">
-                    Browse the catalogue
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                  <Link href="/about" className="pill-glass tap">Read the equation</Link>
-                </div>
+            <div className="mt-8 max-w-3xl animate-fade-up delay-4">
+              <p className="text-base leading-7 text-paper/70 sm:text-lg">
+                Single-frequency tones, held perfectly even. No beats, no melodies, no narration. Preview every tone live, then keep the full-length files forever.
+              </p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link href="/shop" className="pill-solid tap !bg-paper !text-graphite">
+                  Browse the catalogue
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+                <Link href="/science" className="pill-glass tap">Read the equation</Link>
               </div>
-              <SignalCard />
             </div>
 
             <div className="mt-12 pb-12 animate-fade-up delay-5 lg:mt-14 lg:pb-16">
@@ -61,15 +58,15 @@ export default function HomePage() {
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
               <div className="data-num text-[11px] uppercase tracking-widest text-ink-2">The catalogue</div>
-              <h2 className="mt-3 font-display text-5xl lowercase leading-none md:text-6xl">five families.</h2>
+              <h2 className="mt-3 font-display text-5xl lowercase leading-none md:text-6xl">six starting points.</h2>
             </div>
             <Link href="/shop" className="pill-outline tap w-fit">
-              See everything
+              View all
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {featured.map((product, index) => <ProductCard key={product.slug} product={product} delay={index * 0.05} />)}
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {featured.map((product, index) => <ProductCard key={product.slug} product={product} delay={index * 0.05} compact />)}
           </div>
         </section>
 
@@ -83,7 +80,7 @@ export default function HomePage() {
               <p className="mt-6 max-w-md leading-7 text-ink-2">
                 Every tone is a pure sine wave, sampled at CD quality with a short fade so it starts and ends without a click. Nothing is layered, nothing is added.
               </p>
-              <Link href="/about" className="pill-outline tap mt-7">
+              <Link href="/science" className="pill-outline tap mt-7">
                 Read the equation
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
@@ -95,38 +92,6 @@ export default function HomePage() {
       <FaqSection />
       <Footer />
     </div>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <div className="text-paper">{value}</div>
-      <div className="mt-1 uppercase tracking-widest">{label}</div>
-    </div>
-  );
-}
-
-function SignalCard() {
-  return (
-    <aside className="hidden rounded-[2rem] border border-white/10 bg-white/[0.045] p-5 text-paper shadow-[0_40px_100px_-60px_rgba(0,0,0,0.8)] backdrop-blur-md animate-fade-up delay-5 lg:block">
-      <div className="flex items-center justify-between gap-4">
-        <div className="data-num text-[11px] uppercase tracking-widest text-paper/50">Live signal</div>
-        <div className="h-2 w-2 rounded-full bg-paper" />
-      </div>
-      <div className="mt-7 rounded-2xl bg-paper/5 px-4 py-3 text-paper/80">
-        <Oscilloscope active height={52} color="#E9EAE4" />
-      </div>
-      <div className="data-num mt-7 grid grid-cols-2 gap-x-6 gap-y-5 text-[11px] text-paper/50">
-        <Stat label="Tracks" value="27" />
-        <Stat label="Per track" value="11:11:11" />
-        <Stat label="Sample" value="44.1 kHz" />
-        <Stat label="Level" value="-6 dBFS" />
-      </div>
-      <p className="mt-7 text-sm leading-6 text-paper/55">
-        Every preview is generated in-browser from the same sine-wave equation used for the final files.
-      </p>
-    </aside>
   );
 }
 
@@ -168,7 +133,7 @@ function ListeningFlow() {
             <h2 className="mt-3 font-display text-5xl lowercase leading-none md:text-6xl">one tone, no friction.</h2>
           </div>
           <p className="max-w-2xl leading-7 text-paper/62">
-            Sustain is designed to disappear into the background. Minimal controls, clear product families, and previews that behave exactly like the final audio.
+            StillTones is designed to disappear into the background. Minimal controls, clear product families, and previews that behave exactly like the final audio.
           </p>
         </div>
         <div className="mt-12 grid gap-4 md:grid-cols-3">

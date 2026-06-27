@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { Oscilloscope } from "@/components/Oscilloscope";
 
 export const metadata: Metadata = {
   title: "About",
@@ -33,25 +32,20 @@ export default function AboutPage() {
           <Header variant="dark" />
           <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-6 md:px-10 lg:grid-cols-[1fr_24rem] lg:items-end lg:py-28">
             <div>
-              <div className="pill-glass animate-fade-up delay-1">About Sustain</div>
+              <div className="pill-glass animate-fade-up delay-1">About StillTones</div>
               <h1 className="mt-8 max-w-4xl font-display text-[clamp(4rem,10vw,9rem)] lowercase leading-[0.86] tracking-[-0.065em] animate-fade-up delay-2">
                 sound, held steady.
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-8 text-paper/68 animate-fade-up delay-3">
-                Sustain is a small studio making single-frequency audio for people who want sound, not stimulation. Every track is one clean tone, held even for over eleven hours, with no beat, no melody, and nothing competing for your attention. You press play, and the room goes quiet.
+                StillTones is a small studio making single-frequency audio for people who want sound, not stimulation. Every track is one clean tone, held even for over eleven hours, with no beat, no melody, and nothing competing for your attention. You press play, and the room goes quiet.
               </p>
             </div>
             <div className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-5 backdrop-blur-md animate-fade-up delay-4">
-              <div className="data-num text-[11px] uppercase tracking-widest text-paper/45">One equation</div>
-              <div className="mt-5 rounded-2xl bg-paper/5 p-4 text-paper/80">
-                <Oscilloscope active height={64} color="#E9EAE4" />
-              </div>
-              <dl className="data-num mt-6 grid grid-cols-2 gap-y-4 text-[11px] text-paper/45">
-                <Spec label="Format" value="FLAC + MP3" />
-                <Spec label="Length" value="11:11:11" />
-                <Spec label="Sample" value="44.1 kHz" />
-                <Spec label="Level" value="-6 dBFS" />
-              </dl>
+              <div className="data-num text-[11px] uppercase tracking-widest text-paper/45">Small studio</div>
+              <p className="mt-5 font-display text-4xl lowercase leading-none">one person, one standard.</p>
+              <p className="mt-5 text-sm leading-6 text-paper/62">
+                Every release is checked by ear, grouped by use, and written plainly so you know exactly what you are buying.
+              </p>
             </div>
           </div>
         </div>
@@ -60,7 +54,7 @@ export default function AboutPage() {
       <main>
         <EditorialSection label="What we make" title="sound, not stimulation.">
           <p>
-            Most background audio is busy. It builds, it swells, it pulls you back out of whatever you were doing. We went the other way. A Sustain track is a single steady tone that fills a space and then disappears, the kind of sound you stop noticing in the best way.
+            Most background audio is busy. It builds, it swells, it pulls you back out of whatever you were doing. We went the other way. A StillTones track is a single steady tone that fills a space and then disappears, the kind of sound you stop noticing in the best way.
           </p>
           <p>
             There are tones for focus, for study, for winding down, and for sleep, grouped by what you are doing and how each one feels. Pick the one that sits right, and stay in it for as long as you need.
@@ -75,7 +69,7 @@ export default function AboutPage() {
             </div>
             <div className="soft-card rounded-[2rem] p-6 sm:p-8">
               <p className="text-xl leading-9 text-ink md:text-2xl">
-                Sustain started from a simple frustration: most focus and sleep audio is doing too much. Layers, swells, a melody that loops just often enough to notice. I wanted the opposite, a single steady tone, made properly, that I could leave running through a whole day of work or a full night of sleep and simply forget about.
+                StillTones started from a simple frustration: most focus and sleep audio is doing too much. Layers, swells, a melody that loops just often enough to notice. I wanted the opposite, a single steady tone, made properly, that I could leave running through a whole day of work or a full night of sleep and simply forget about.
               </p>
               <p className="mt-6 leading-7 text-ink-2">
                 So I built it, one frequency at a time, each to a standard I would want for myself. Everything here is made by one person who cares about both sound and design. If a thing could be cleaner, calmer, or more honest, that is the version we ship.
@@ -84,31 +78,13 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="hairline-t bg-paper">
-          <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-6 md:px-10 lg:grid-cols-[1fr_1fr] lg:py-28">
-            <div>
-              <div className="data-num text-[11px] uppercase tracking-widest text-ink-2">How they are made</div>
-              <h2 className="mt-3 font-display text-5xl lowercase leading-none md:text-6xl">from one equation.</h2>
-              <div className="mt-8 space-y-5 leading-7 text-ink-2">
-                <p>
-                  Each tone is a pure sine wave, the simplest sound there is, rendered at full studio quality and held perfectly steady from the first second to the last. Nothing is sampled, looped, or guessed at.
-                </p>
-                <p>
-                  We deliver every track in lossless FLAC alongside MP3, so what you hear is exactly what was made, with nothing compressed away. You can press play on any tone to hear your own browser run it live.
-                </p>
-              </div>
-            </div>
-            <EquationCard />
-          </div>
-        </section>
-
         <section className="hairline-t bg-graphite text-paper">
           <div className="mx-auto grid max-w-7xl gap-5 px-5 py-20 sm:px-6 md:grid-cols-2 md:px-10 lg:py-28">
-            <DarkCard label="Why eleven hours" title="long enough to forget it.">
-              Every track runs for exactly eleven hours, eleven minutes, and eleven seconds. The length is practical first: it covers a full working day or a whole night without ever looping back on itself or fading out, so you are never pulled out by a restart. The exact 11:11:11 is our signature, the same across the entire catalogue.
+            <DarkCard label="Why long files" title="long enough to forget it.">
+              Every track is long enough to cover a full working day or a whole night without asking you to restart anything. The point is simple: press play once, lower the volume, and let the room settle.
             </DarkCard>
-            <DarkCard label="On quality" title="simple sound needs clean files.">
-              We master and deliver everything in lossless FLAC, with an MP3 version alongside. For a sound this simple and this long, quality matters more, not less. Lossless keeps the tone clean from the first second to the last. MP3 is there for convenience, for phones and quick listening, when you want a smaller file.
+            <DarkCard label="How we sell" title="plain files, no lock-in.">
+              StillTones is built as a product you can keep. No subscription, no login habit, no disappearing library. You receive audio files, save them where you like, and use them on your own devices.
             </DarkCard>
           </div>
         </section>
@@ -167,7 +143,7 @@ export default function AboutPage() {
 
         <section className="bg-graphite px-5 py-20 text-paper sm:px-6 md:px-10 lg:py-28">
           <div className="mx-auto max-w-7xl rounded-[2.25rem] border border-white/10 bg-white/[0.045] p-8 text-center backdrop-blur-md sm:p-12">
-            <div className="data-num text-[11px] uppercase tracking-widest text-paper/45">Sustain</div>
+            <div className="data-num text-[11px] uppercase tracking-widest text-paper/45">StillTones</div>
             <p className="mx-auto mt-5 max-w-4xl font-display text-5xl lowercase leading-none tracking-[-0.045em] md:text-7xl">
               made quietly, for quiet.
             </p>
@@ -194,28 +170,6 @@ function EditorialSection({ label, title, children }: { label: string; title: st
   );
 }
 
-function EquationCard() {
-  return (
-    <div className="soft-card rounded-[2rem] bg-paper p-6 sm:p-8">
-      <div className="data-num text-xs text-ink-2">A pure tone is a sine wave</div>
-      <div className="mt-4 overflow-x-auto font-mono text-2xl">y(t) = A · sin(2πf · t)</div>
-      <div className="hairline-t my-6" />
-      <div className="data-num text-xs text-ink-2">Sampled at fs</div>
-      <div className="mt-3 overflow-x-auto font-mono text-lg">y[n] = A · sin(2πf · n / fs)</div>
-      <div className="hairline-t my-6" />
-      <dl className="grid grid-cols-2 gap-y-3 font-mono text-xs">
-        <Spec label="A" value="0.5, -6 dBFS" />
-        <Spec label="fs" value="44,100 Hz" />
-        <Spec label="duration" value="11:11:11" />
-        <Spec label="fade" value="50 ms in and out" />
-      </dl>
-      <div className="mt-7 rounded-2xl bg-paper-2 p-4 text-ink">
-        <Oscilloscope active height={42} />
-      </div>
-    </div>
-  );
-}
-
 function DarkCard({ label, title, children }: { label: string; title: string; children: React.ReactNode }) {
   return (
     <article className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-6 backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:bg-white/[0.065] sm:p-8">
@@ -233,14 +187,5 @@ function LightCard({ label, title, children }: { label: string; title: string; c
       <h2 className="mt-5 font-display text-4xl lowercase leading-none md:text-5xl">{title}</h2>
       <p className="mt-6 leading-7 text-ink-2">{children}</p>
     </article>
-  );
-}
-
-function Spec({ label, value }: { label: string; value: string }) {
-  return (
-    <>
-      <dt className="text-current opacity-60">{label}</dt>
-      <dd className="text-current">{value}</dd>
-    </>
   );
 }

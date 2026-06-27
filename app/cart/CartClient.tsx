@@ -5,9 +5,23 @@ import { Minus, Plus, X } from "lucide-react";
 import { CATEGORY_CLASS } from "@/data/products";
 import { useCart } from "@/lib/cart";
 import { haptic } from "@/lib/haptics";
+import { useToast } from "@/lib/toast";
 
 export function CartClient() {
   const { resolved, totalUsd, setQty, remove, count } = useCart();
+  const { showToast } = useToast();
+
+  const updateQuantity = (slug: string, title: string, nextQty: number) => {
+    haptic(nextQty <= 0 ? "medium" : "light");
+    setQty(slug, nextQty);
+    showToast({ title: nextQty <= 0 ? `removed ${title.toLowerCase()} from cart` : "cart updated", kind: nextQty <= 0 ? "info" : "success" });
+  };
+
+  const removeLine = (slug: string, title: string) => {
+    haptic("medium");
+    remove(slug);
+    showToast({ title: `removed ${title.toLowerCase()} from cart`, kind: "info" });
+  };
 
   if (resolved.length === 0) {
     return (
@@ -31,16 +45,16 @@ export function CartClient() {
               <div className="data-num mt-1 text-[11px] uppercase tracking-widest text-ink-2">{line.product.tracks.length} {line.product.tracks.length === 1 ? "track" : "tracks"} · 11:11:11</div>
             </div>
             <div className="flex w-fit items-center gap-1 rounded-full bg-paper-2 p-1">
-              <button onClick={() => { haptic(); setQty(line.slug, line.qty - 1); }} className="tap flex h-8 w-8 items-center justify-center rounded-full hover:bg-paper" aria-label={`Decrease ${line.product.title}`}>
+              <button onClick={() => updateQuantity(line.slug, line.product.title, line.qty - 1)} className="tap flex h-8 w-8 items-center justify-center rounded-full hover:bg-paper" aria-label={`Decrease ${line.product.title}`}>
                 <Minus className="h-3.5 w-3.5" />
               </button>
               <span className="data-num w-7 text-center text-sm">{line.qty}</span>
-              <button onClick={() => { haptic(); setQty(line.slug, line.qty + 1); }} className="tap flex h-8 w-8 items-center justify-center rounded-full hover:bg-paper" aria-label={`Increase ${line.product.title}`}>
+              <button onClick={() => updateQuantity(line.slug, line.product.title, line.qty + 1)} className="tap flex h-8 w-8 items-center justify-center rounded-full hover:bg-paper" aria-label={`Increase ${line.product.title}`}>
                 <Plus className="h-3.5 w-3.5" />
               </button>
             </div>
             <div className="data-num text-right text-sm lg:w-20">${line.product.priceUsd * line.qty}</div>
-            <button onClick={() => { haptic("medium"); remove(line.slug); }} className="tap flex h-9 w-9 items-center justify-center rounded-full text-ink-2 hover:bg-paper-2" aria-label={`Remove ${line.product.title}`}>
+            <button onClick={() => removeLine(line.slug, line.product.title)} className="tap flex h-9 w-9 items-center justify-center rounded-full text-ink-2 hover:bg-paper-2" aria-label={`Remove ${line.product.title}`}>
               <X className="h-4 w-4" />
             </button>
           </div>
