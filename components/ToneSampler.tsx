@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Play, Square } from "lucide-react";
 import { useTonePreview } from "@/lib/audio";
+import { haptic } from "@/lib/haptics";
 
 const SAMPLE_TONES = [
   { name: "Nightfall", freq: 20, family: "Night" },
@@ -72,6 +73,7 @@ export function ToneSampler() {
     if (!el) return;
     const amount = el.clientWidth * 0.75;
     const loopPoint = el.scrollWidth / 2;
+    haptic();
     if (direction === "left" && el.scrollLeft < amount) el.scrollLeft += loopPoint;
     el.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
   };
@@ -112,7 +114,11 @@ export function ToneSampler() {
             <button
               key={`${tone.name}-${tone.freq}-${index}`}
               type="button"
-              onClick={() => (on ? stop() : play(tone.freq, `${tone.name} · ${tone.freq} Hz`))}
+              onClick={() => {
+                haptic(on ? "light" : "medium");
+                if (on) stop();
+                else play(tone.freq, `${tone.name} · ${tone.freq} Hz`);
+              }}
               className={`flex w-[220px] shrink-0 flex-col rounded-3xl p-5 text-left transition duration-300 hover:scale-[1.025] active:scale-[0.98] sm:w-[244px] ${on ? "bg-paper text-graphite" : "bg-white/[0.055] text-paper backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.10),inset_0_0_0_1px_rgba(255,255,255,0.08)]"}`}
               aria-pressed={on}
             >

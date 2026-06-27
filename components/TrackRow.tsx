@@ -3,6 +3,7 @@
 import { Play, Square } from "lucide-react";
 import type { Track } from "@/data/products";
 import { useTonePreview } from "@/lib/audio";
+import { haptic } from "@/lib/haptics";
 import { Oscilloscope } from "./Oscilloscope";
 
 export function TrackRow({ track, index }: { track: Track; index: number }) {
@@ -10,7 +11,7 @@ export function TrackRow({ track, index }: { track: Track; index: number }) {
   const playing = isPlaying(track.freq);
 
   return (
-    <div className="hairline-b grid gap-4 py-5 sm:grid-cols-[40px_1fr_96px_110px_44px] sm:items-start">
+    <div className="hairline-b grid gap-4 py-5 transition-colors hover:bg-ink/[0.025] sm:grid-cols-[40px_1fr_96px_110px_44px] sm:items-start">
       <div className="data-num text-[11px] text-ink-2 sm:pt-1">{String(index + 1).padStart(2, "0")}</div>
       <div>
         <div className="font-display text-xl lowercase leading-tight">{track.name}</div>
@@ -21,7 +22,11 @@ export function TrackRow({ track, index }: { track: Track; index: number }) {
         <Oscilloscope active={playing} height={32} color="currentColor" />
       </div>
       <button
-        onClick={() => (playing ? stop() : play(track.freq, track.name))}
+        onClick={() => {
+          haptic(playing ? "light" : "medium");
+          if (playing) stop();
+          else play(track.freq, track.name);
+        }}
         className="tap flex h-11 w-11 items-center justify-center rounded-full bg-ink text-paper data-[playing=true]:bg-[color:var(--accent-hue)]"
         data-playing={playing}
         aria-label={playing ? `Stop ${track.name}` : `Preview ${track.name}`}

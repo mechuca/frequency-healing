@@ -73,6 +73,8 @@ export default function HomePage() {
           </div>
         </section>
 
+        <ListeningFlow />
+
         <section className="hairline-t bg-paper-2">
           <div className="mx-auto grid max-w-7xl gap-12 px-5 py-24 sm:px-6 md:grid-cols-[0.85fr_1fr] md:px-10 lg:py-32">
             <div>
@@ -147,5 +149,38 @@ function EquationCard() {
         <Oscilloscope active height={42} />
       </div>
     </div>
+  );
+}
+
+function ListeningFlow() {
+  const steps = [
+    ["01", "preview live", "Try any tone instantly. The browser generates the frequency in real time, so the preview stays honest."],
+    ["02", "choose a family", "Pick by use case: deep work, night, calm, study, or bright. Every family keeps one clear sonic role."],
+    ["03", "press play once", "The final files run for 11:11:11, long enough for a work day or night without loops or restarts."],
+  ];
+
+  return (
+    <section className="hairline-t bg-graphite text-paper">
+      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:px-10 lg:py-28">
+        <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-end">
+          <div>
+            <div className="data-num text-[11px] uppercase tracking-widest text-paper/45">How it fits</div>
+            <h2 className="mt-3 font-display text-5xl lowercase leading-none md:text-6xl">one tone, no friction.</h2>
+          </div>
+          <p className="max-w-2xl leading-7 text-paper/62">
+            Sustain is designed to disappear into the background. Minimal controls, clear product families, and previews that behave exactly like the final audio.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-4 md:grid-cols-3">
+          {steps.map(([num, title, copy]) => (
+            <div key={title} className="rounded-[1.75rem] border border-white/10 bg-white/[0.045] p-6 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.065]">
+              <div className="data-num text-[11px] text-paper/40">{num}</div>
+              <h3 className="mt-8 font-display text-3xl lowercase leading-none">{title}</h3>
+              <p className="mt-4 text-sm leading-6 text-paper/58">{copy}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

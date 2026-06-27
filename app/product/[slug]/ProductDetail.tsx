@@ -6,6 +6,7 @@ import { useState } from "react";
 import { CATEGORY_CLASS, CATEGORY_LABEL, type Product } from "@/data/products";
 import { TrackRow } from "@/components/TrackRow";
 import { useCart } from "@/lib/cart";
+import { haptic } from "@/lib/haptics";
 
 export function ProductDetail({ product }: { product: Product }) {
   const { add } = useCart();
@@ -20,7 +21,7 @@ export function ProductDetail({ product }: { product: Product }) {
       </div>
 
       <div className="mt-8 grid gap-12 md:grid-cols-[1.08fr_1fr] md:items-start">
-        <section className="tone-cover relative aspect-[4/5] overflow-hidden rounded-[2rem] animate-fade-up">
+        <section className="tone-cover card-lift relative aspect-[4/5] overflow-hidden rounded-[2rem] animate-fade-up">
           <div className="absolute inset-0 flex flex-col justify-between p-7 text-paper sm:p-9">
             <div className="data-num text-xs uppercase tracking-widest opacity-80">{CATEGORY_LABEL[product.category]} · {product.kind}</div>
             <div>
@@ -46,11 +47,12 @@ export function ProductDetail({ product }: { product: Product }) {
             <button
               type="button"
               onClick={() => {
+                haptic("success");
                 add(product.slug);
                 setAdded(true);
                 window.setTimeout(() => setAdded(false), 1600);
               }}
-              className="pill-solid tap bg-[color:var(--accent-hue)]"
+              className="pill-solid tap bg-[color:var(--accent-hue)] shadow-[0_18px_40px_-24px_var(--accent-hue)]"
             >
               {added ? <><Check className="h-3.5 w-3.5" /> Added</> : <>Add to cart <ArrowRight className="h-3.5 w-3.5" /></>}
             </button>

@@ -1,8 +1,11 @@
+"use client";
+
 import { FAQ_GROUPS } from "@/data/faqs";
+import { haptic } from "@/lib/haptics";
 
 export function FaqSection() {
   return (
-    <section className="hairline-t bg-paper" id="faq">
+    <section className="hairline-t bg-paper section-surface" id="faq">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-24 sm:px-6 md:px-10 lg:grid-cols-[0.7fr_1.3fr] lg:py-32">
         <div className="lg:sticky lg:top-8 lg:self-start">
           <div className="data-num text-[11px] uppercase tracking-widest text-ink-2">FAQs</div>
@@ -19,10 +22,10 @@ export function FaqSection() {
           {FAQ_GROUPS.map((group) => (
             <div key={group.title}>
               <div className="data-num mb-3 text-[11px] uppercase tracking-widest text-ink-2">{group.title}</div>
-              <div className="overflow-hidden rounded-[1.75rem] border border-hairline bg-paper-2">
+              <div className="overflow-hidden rounded-[1.75rem] border border-hairline bg-paper-2 shadow-[0_24px_70px_-55px_rgba(25,27,25,0.35)]">
                 {group.items.map((item, index) => (
-                  <details key={item.question} className="group border-b border-hairline last:border-0" open={index === 0 && group.title === "About the audio"}>
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-6 px-5 py-5 font-display text-xl lowercase leading-tight text-ink transition-colors hover:text-ink-2 sm:px-6 [&::-webkit-details-marker]:hidden">
+                  <details key={item.question} className="group border-b border-hairline transition-colors open:bg-paper/45 hover:bg-paper/35 last:border-0" open={index === 0 && group.title === "About the audio"}>
+                    <summary onClick={() => haptic()} className="flex cursor-pointer list-none items-center justify-between gap-6 px-5 py-5 font-display text-xl lowercase leading-tight text-ink transition-colors hover:text-ink-2 sm:px-6 [&::-webkit-details-marker]:hidden">
                       {item.question}
                       <span className="relative h-5 w-5 shrink-0 text-ink-2">
                         <span className="absolute left-0 top-1/2 h-px w-5 bg-current" />
