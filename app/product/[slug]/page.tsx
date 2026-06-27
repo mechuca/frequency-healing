@@ -23,20 +23,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: `${product.title} | StillTones`,
       description: product.blurb,
       url: `/product/${product.slug}`,
-      images: [
-        {
-          url: `/product/${product.slug}/opengraph-image`,
-          width: 1200,
-          height: 630,
-          alt: `${product.title} by StillTones`,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title: `${product.title} | StillTones`,
       description: product.blurb,
-      images: [`/product/${product.slug}/opengraph-image`],
     },
   };
 }

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { useState } from "react";
-import { Cover } from "@/components/Cover";
 import { CATEGORY_CLASS, CATEGORY_LABEL, type Product } from "@/data/products";
 import { TrackRow } from "@/components/TrackRow";
 import { useCart } from "@/lib/cart";
@@ -74,8 +73,17 @@ export function ProductDetail({ product }: { product: Product }) {
       </div>
 
       <div className="mt-8 grid gap-12 md:grid-cols-[1.08fr_1fr] md:items-start">
-        <section className="card-lift relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-paper animate-fade-up">
-          <Cover product={product} />
+        <section className="tone-cover card-lift relative aspect-[4/5] overflow-hidden rounded-[2rem] animate-fade-up">
+          <div className="absolute inset-0 flex flex-col justify-between p-7 text-paper sm:p-9">
+            <div className="data-num text-xs uppercase tracking-widest opacity-80">{CATEGORY_LABEL[product.category]} · {product.kind}</div>
+            <div>
+              <svg viewBox="0 0 260 48" className="w-full opacity-90" aria-hidden="true">
+                <path d="M0 24 C 13 5, 26 5, 39 24 S 65 43, 78 24 S 104 5, 117 24 S 143 43, 156 24 S 182 5, 195 24 L 260 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+              <h1 className="mt-5 font-display text-[clamp(3.4rem,8vw,6.5rem)] lowercase leading-[0.86] tracking-[-0.06em]">{product.title}</h1>
+              <div className="data-num mt-4 text-xs opacity-80">{product.tracks.length} {product.tracks.length === 1 ? "track" : "tracks"} · 11:11:11 · FLAC</div>
+            </div>
+          </div>
         </section>
 
         <section className="animate-fade-up delay-1">

@@ -5,7 +5,6 @@ import { FaqSection } from "@/components/FaqSection";
 import { Header } from "@/components/Header";
 import { HeroWaveform } from "@/components/HeroWaveform";
 import { Oscilloscope } from "@/components/Oscilloscope";
-import { Cover } from "@/components/Cover";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { ProductCard } from "@/components/ProductCard";
 import { ToneSampler } from "@/components/ToneSampler";
@@ -105,8 +104,17 @@ export default function HomePage() {
 function LibraryFeature({ product }: { product: (typeof PRODUCTS)[number] }) {
   return (
     <Link href={`/product/${product.slug}`} className="group mt-12 grid overflow-hidden rounded-[2rem] bg-graphite text-paper shadow-[0_30px_90px_-60px_rgba(21,23,21,0.85)] md:grid-cols-[0.72fr_1fr]">
-      <div className="aspect-[1.2/1] overflow-hidden md:aspect-auto">
-        <Cover product={product} variant="wide" />
+      <div className="category-all tone-cover relative min-h-72 overflow-hidden md:min-h-full">
+        <div className="absolute inset-0 flex flex-col justify-between p-6 text-paper sm:p-8">
+          <div className="data-num text-[11px] uppercase tracking-widest opacity-70">Library · Complete Library</div>
+          <div>
+            <svg viewBox="0 0 360 56" className="w-full opacity-90" aria-hidden="true">
+              <path d="M0 28 C 18 6, 36 6, 54 28 S 90 50, 108 28 S 144 6, 162 28 S 198 50, 216 28 S 252 6, 270 28 L 360 28" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+            <div className="mt-5 font-display text-4xl lowercase leading-none tracking-[-0.045em] sm:text-5xl">complete library</div>
+            <div className="data-num mt-3 text-xs opacity-70">27 tracks · 11:11:11 · FLAC + MP3</div>
+          </div>
+        </div>
       </div>
       <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-10">
         <div>
