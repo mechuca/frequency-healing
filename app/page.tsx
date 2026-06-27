@@ -119,7 +119,7 @@ function LibraryFeature({ product }: { product: (typeof PRODUCTS)[number] }) {
             </svg>
           </div>
           <div>
-            <div className="font-display text-[3.2rem] lowercase leading-[0.88] tracking-[-0.055em] sm:text-6xl">complete library</div>
+            <div className="font-display text-[3.2rem] lowercase leading-[0.88] tracking-[-0.055em] text-paper drop-shadow-[0_12px_32px_rgba(0,0,0,0.35)] sm:text-6xl">complete library</div>
             <div className="data-num mt-4 text-xs uppercase tracking-widest text-paper/48">FLAC + MP3 · lifetime files</div>
           </div>
         </div>
