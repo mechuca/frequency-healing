@@ -33,7 +33,7 @@ export default function HomePage() {
               </h1>
             </div>
 
-            <div className="mt-8 grid gap-8 animate-fade-up delay-4 lg:grid-cols-[minmax(0,42rem)_22rem] lg:items-end lg:justify-between">
+            <div className="mt-8 grid gap-8 animate-fade-up delay-4 lg:grid-cols-[minmax(0,42rem)_22rem] lg:items-start lg:justify-between">
               <div>
                 <p className="text-base leading-7 text-paper/70 sm:text-lg">
                   Single-frequency tones, held perfectly even. No beats, no melodies, no narration. Preview every tone live, then keep the full-length files forever.
