@@ -16,9 +16,27 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: product.title,
     description: product.blurb,
+    alternates: {
+      canonical: `/product/${product.slug}`,
+    },
     openGraph: {
       title: `${product.title} | StillTones`,
       description: product.blurb,
+      url: `/product/${product.slug}`,
+      images: [
+        {
+          url: `/product/${product.slug}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: `${product.title} by StillTones`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.title} | StillTones`,
+      description: product.blurb,
+      images: [`/product/${product.slug}/opengraph-image`],
     },
   };
 }

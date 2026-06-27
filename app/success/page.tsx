@@ -16,7 +16,7 @@ export default function SuccessPage() {
         <div className="data-num text-[11px] uppercase tracking-widest text-ink-2">Checkout preview</div>
         <h1 className="mt-3 font-display text-5xl lowercase leading-none md:text-7xl">almost ready.</h1>
         <p className="mx-auto mt-6 max-w-xl leading-7 text-ink-2">
-          The storefront is rebuilt. The next production step is Stripe Checkout plus secure delivery links. No test keys or secrets are hardcoded in this app.
+          Checkout is still in preview mode. Stripe Checkout, order storage, and delivery email endpoints now fail loudly if required environment variables or backend implementation are missing.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link href="/shop" className="pill-solid tap">Back to shop</Link>

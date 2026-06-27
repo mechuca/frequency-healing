@@ -5,12 +5,15 @@ import { FaqSection } from "@/components/FaqSection";
 import { Header } from "@/components/Header";
 import { HeroWaveform } from "@/components/HeroWaveform";
 import { Oscilloscope } from "@/components/Oscilloscope";
+import { Cover } from "@/components/Cover";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { ProductCard } from "@/components/ProductCard";
 import { ToneSampler } from "@/components/ToneSampler";
 import { PRODUCTS } from "@/data/products";
 
 export default function HomePage() {
-  const featured = PRODUCTS.slice(0, 6);
+  const library = PRODUCTS.find((product) => product.slug === "complete-library");
+  const featured = PRODUCTS.filter((product) => product.slug !== "complete-library").slice(0, 6);
 
   return (
     <div className="min-h-screen bg-paper">
@@ -67,6 +70,7 @@ export default function HomePage() {
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
+          {library ? <LibraryFeature product={library} /> : null}
           <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((product, index) => <ProductCard key={product.slug} product={product} delay={index * 0.05} compact />)}
           </div>
@@ -90,10 +94,36 @@ export default function HomePage() {
             <EquationCard />
           </div>
         </section>
+        <NewsletterSignup />
       </main>
       <FaqSection />
       <Footer />
     </div>
+  );
+}
+
+function LibraryFeature({ product }: { product: (typeof PRODUCTS)[number] }) {
+  return (
+    <Link href={`/product/${product.slug}`} className="group mt-12 grid overflow-hidden rounded-[2rem] bg-graphite text-paper shadow-[0_30px_90px_-60px_rgba(21,23,21,0.85)] md:grid-cols-[0.72fr_1fr]">
+      <div className="aspect-[1.2/1] overflow-hidden md:aspect-auto">
+        <Cover product={product} variant="wide" />
+      </div>
+      <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-10">
+        <div>
+          <div className="data-num text-[11px] uppercase tracking-widest text-paper/45">Best value</div>
+          <h3 className="mt-4 font-display text-4xl lowercase leading-none tracking-[-0.045em] md:text-6xl">complete library.</h3>
+          <p className="mt-5 max-w-xl leading-7 text-paper/62">All 27 tones, in lossless. Far less than buying the sets separately.</p>
+        </div>
+        <div className="mt-10 flex flex-wrap items-center gap-3">
+          <span className="data-num rounded-full bg-paper px-4 py-3 text-sm text-graphite">$49</span>
+          <span className="data-num rounded-full border border-white/10 px-4 py-3 text-sm text-paper/55">$75 value bought as sets</span>
+          <span className="pill-glass tap group-hover:translate-y-[-1px]">
+            Open library
+            <ArrowRight className="h-3.5 w-3.5" />
+          </span>
+        </div>
+      </div>
+    </Link>
   );
 }
 

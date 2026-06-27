@@ -8,14 +8,15 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const hanken = Hanken_Grotesk({ subsets: ["latin"], variable: "--font-hanken" });
 const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-plex-mono" });
 
-const siteTitle = "StillTones";
-const siteDescription = "Single-frequency tones for focus, calm, study, and sleep. Lossless FLAC and MP3 files, held steady for over eleven hours.";
+const siteTitle = "StillTones, pure frequency audio for focus, calm, and sleep";
+const siteName = "StillTones";
+const siteDescription = "Single, clean tones, rendered lossless and held for over eleven hours. Preview every tone live, then keep the files. No mysticism, just steady sound to work, rest, and sleep to.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: siteTitle,
-    template: `%s | ${siteTitle}`,
+    template: `%s | ${siteName}`,
   },
   description: siteDescription,
   alternates: {
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     title: siteTitle,
     description: siteDescription,
     url: "/",
-    siteName: siteTitle,
+    siteName,
     images: [
       {
         url: "/opengraph-image",

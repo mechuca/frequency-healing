@@ -17,7 +17,7 @@ export default function ShopPage() {
           <div className="data-num text-[11px] uppercase tracking-widest text-ink-2">Catalogue</div>
           <h1 className="mt-3 font-display text-5xl lowercase leading-none md:text-7xl">every tone, ready to preview.</h1>
           <p className="mt-6 max-w-xl leading-7 text-ink-2">
-            Tap any cover to hear the first tone live in your browser. Open a product page to preview every track in the set.
+            Open any cover for full details, or use the play button to hear the first tone live in your browser.
           </p>
         </div>
         <ShopClient />

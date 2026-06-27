@@ -8,7 +8,11 @@ const FILTERS: CategoryKey[] = ["all", "focus", "sleep", "calm", "study", "energ
 
 export function ShopClient() {
   const [active, setActive] = useState<CategoryKey>("all");
-  const products = active === "all" ? PRODUCTS : PRODUCTS.filter((product) => product.category === active || product.category === "all");
+  const products = (active === "all" ? PRODUCTS : PRODUCTS.filter((product) => product.category === active || product.category === "all")).toSorted((a, b) => {
+    if (a.kind === "library") return -1;
+    if (b.kind === "library") return 1;
+    return 0;
+  });
 
   return (
     <>
