@@ -69,10 +69,10 @@ export default function HomePage() {
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
-          {library ? <LibraryFeature product={library} /> : null}
           <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((product, index) => <ProductCard key={product.slug} product={product} delay={index * 0.05} compact />)}
           </div>
+          {library ? <LibraryFeature product={library} /> : null}
         </section>
 
         <ListeningFlow />
@@ -103,7 +103,7 @@ export default function HomePage() {
 
 function LibraryFeature({ product }: { product: (typeof PRODUCTS)[number] }) {
   return (
-    <Link href={`/product/${product.slug}`} className="group mt-12 block overflow-hidden rounded-[2rem] bg-graphite text-paper shadow-[0_34px_110px_-70px_rgba(21,23,21,0.9)] transition duration-300 hover:-translate-y-1">
+    <Link href={`/product/${product.slug}`} className="group mt-10 block overflow-hidden rounded-[2rem] bg-graphite text-paper shadow-[0_34px_110px_-70px_rgba(21,23,21,0.9)] transition duration-300 hover:-translate-y-1 lg:mt-12">
       <div className="relative grid min-h-[31rem] gap-8 overflow-hidden p-5 sm:p-8 md:grid-cols-[1.02fr_0.98fr] md:p-10 lg:p-12">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(233,234,228,0.12),transparent_24rem),radial-gradient(circle_at_88%_100%,rgba(199,207,201,0.12),transparent_28rem)]" />
         <div className="absolute inset-y-0 left-0 hidden w-px bg-white/10 md:block" />
