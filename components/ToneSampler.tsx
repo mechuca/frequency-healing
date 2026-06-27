@@ -20,15 +20,18 @@ const SAMPLE_TONES = [
 export function ToneSampler() {
   const { play, stop, freq: playingFreq } = useTonePreview();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const pausedRef = useRef(false);
   const [canLeft, setCanLeft] = useState(false);
   const [canRight, setCanRight] = useState(true);
+  const carouselTones = [...SAMPLE_TONES, ...SAMPLE_TONES];
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     const update = () => {
-      setCanLeft(el.scrollLeft > 2);
-      setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 2);
+      const hasOverflow = el.scrollWidth > el.clientWidth + 2;
+      setCanLeft(hasOverflow);
+      setCanRight(hasOverflow);
     };
     update();
     el.addEventListener("scroll", update, { passive: true });
@@ -40,10 +43,37 @@ export function ToneSampler() {
     };
   }, []);
 
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let frame = 0;
+    let previous = performance.now();
+
+    const tick = (now: number) => {
+      const delta = now - previous;
+      previous = now;
+
+      if (!pausedRef.current && !document.hidden) {
+        const loopPoint = el.scrollWidth / 2;
+        el.scrollLeft += delta * 0.035;
+        if (el.scrollLeft >= loopPoint) el.scrollLeft -= loopPoint;
+      }
+
+      frame = window.requestAnimationFrame(tick);
+    };
+
+    frame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
   const scroll = (direction: "left" | "right") => {
     const el = scrollRef.current;
     if (!el) return;
-    el.scrollBy({ left: direction === "left" ? -el.clientWidth * 0.75 : el.clientWidth * 0.75, behavior: "smooth" });
+    const amount = el.clientWidth * 0.75;
+    const loopPoint = el.scrollWidth / 2;
+    if (direction === "left" && el.scrollLeft < amount) el.scrollLeft += loopPoint;
+    el.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
   };
 
   return (
@@ -59,15 +89,31 @@ export function ToneSampler() {
           </button>
         </div>
       </div>
-      <div ref={scrollRef} className="mt-3 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-5 pr-5 md:pr-10 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {SAMPLE_TONES.map((tone) => {
+      <div
+        ref={scrollRef}
+        onPointerEnter={() => {
+          pausedRef.current = true;
+        }}
+        onPointerLeave={() => {
+          pausedRef.current = false;
+        }}
+        onFocusCapture={() => {
+          pausedRef.current = true;
+        }}
+        onBlurCapture={(event) => {
+          const next = event.relatedTarget;
+          if (!(next instanceof Node) || !event.currentTarget.contains(next)) pausedRef.current = false;
+        }}
+        className="mt-3 flex gap-3 overflow-x-auto scroll-smooth pb-5 pr-5 md:pr-10 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {carouselTones.map((tone, index) => {
           const on = playingFreq === tone.freq;
           return (
             <button
-              key={`${tone.name}-${tone.freq}`}
+              key={`${tone.name}-${tone.freq}-${index}`}
               type="button"
               onClick={() => (on ? stop() : play(tone.freq, `${tone.name} · ${tone.freq} Hz`))}
-              className={`snap-start flex w-[220px] shrink-0 flex-col rounded-3xl p-5 text-left transition duration-300 hover:scale-[1.025] active:scale-[0.98] sm:w-[244px] ${on ? "bg-paper text-graphite" : "bg-white/[0.055] text-paper backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.10),inset_0_0_0_1px_rgba(255,255,255,0.08)]"}`}
+              className={`flex w-[220px] shrink-0 flex-col rounded-3xl p-5 text-left transition duration-300 hover:scale-[1.025] active:scale-[0.98] sm:w-[244px] ${on ? "bg-paper text-graphite" : "bg-white/[0.055] text-paper backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.10),inset_0_0_0_1px_rgba(255,255,255,0.08)]"}`}
               aria-pressed={on}
             >
               <span className="flex items-center gap-2">
